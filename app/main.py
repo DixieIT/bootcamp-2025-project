@@ -1,0 +1,61 @@
+from fastapi import FastAPI, Header, HTTPException
+
+from app.models.schemas import PromptCreate, PromptRead, PromptPatch, PredictRequest, PredictResponse
+from app.services.prompt_store import FileSnapshotStore, InMemoryStore
+from app.services.processor import process_document
+from app.core.errors import http_error_handler
+from app.core.config import settings
+from app.core.logging import setup_logging
+
+
+store = FileSnapshotStore("var/data.json") if settings.FILE_SNAPSHOT else InMemoryStore()
+app = FastAPI(title="Prompted Doc Processor", version="0.1.0")
+app.add_exception_handler(Exception, http_error_handler)
+setup_logging()
+
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+
+@app.post("/v1/prompts", response_model=PromptRead)
+def create_prompt(
+        data: PromptCreate,
+        x_user_id: str = Header(default="user_anon")
+    ):
+    ...
+
+
+@app.get("/v1/prompts", response_model=list[PromptRead])
+def list_prompts(
+        purpose: str | None = None,
+        x_user_id: str = Header(default="user_anon")
+    ):
+    ...
+
+
+@app.patch("/v1/prompts/{prompt_id}", response_model=PromptRead)
+def patch_prompt(
+        prompt_id: str,
+        data: PromptPatch,
+        x_user_id: str = Header(default="user_anon")
+    ):
+    ...
+
+
+@app.post("/v1/prompts/{prompt_id}/activate")
+def activate_prompt(
+        prompt_id: str,
+        purpose: str,
+        x_user_id: str = Header(default="user_anon"),
+    ):
+    ...
+
+
+@app.post("/v1/predict", response_model=PredictResponse)
+def predict(
+        req: PredictRequest,
+        x_user_id: str = Header(default="user_anon"),
+    ):
+    ...

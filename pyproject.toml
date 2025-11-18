@@ -1,0 +1,15 @@
+[project]
+name = "prompted-doc-processor"
+version = "0.1.0"
+description = "GenAI Bootcamp Project"
+dependencies = [
+    "fastapi~=0.115",
+    "uvicorn~=0.30",
+    "pydantic~=2.9",
+    "pydantic-settings~=2.4"
+]
+requires-python = ">=3.10"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
