@@ -6,6 +6,7 @@ class PromptCreate(BaseModel):
     name: str
     template: str
 
+
 class PromptRead(BaseModel):
     id: str
     purpose: str
@@ -16,7 +17,7 @@ class PromptRead(BaseModel):
 
 class PromptPatch(BaseModel):
     name: Optional[str] = None
-    template: Optional[str] = None
+    template: str
 
 class PredictRequest(BaseModel):
     purpose: str

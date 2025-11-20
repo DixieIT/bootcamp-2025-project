@@ -166,4 +166,4 @@ curl -X POST localhost:8080/v1/prompts -H 'Content-Type: application/json' \
 * **Async** `/v1/predict/batch` using `asyncio.gather`.
 * **A/B compare** endpoint: apply two prompts to the same document, return diff.
 * **Templating** via Jinja2 instead of naive `replace`.
-* **Basic RBAC**: lock prompt modification to `X-User-Id` owner.
+* **Basic RBAC**: lock prompt modification to `X-User-Id` owner. **done**
