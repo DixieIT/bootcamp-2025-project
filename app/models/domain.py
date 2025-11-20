@@ -1,14 +1,18 @@
 from dataclasses import dataclass
 from typing import Optional
 
-@dataclass
-class Prompt:
+from pydantic import BaseModel
+
+class Prompt(BaseModel):
+
     id: str
     purpose: str
     name: str
     template: str
-    user_id: str
     version: int = 1
+    user_id: str
+
+
 
     def update(self, template: str):
         

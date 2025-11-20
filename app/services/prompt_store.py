@@ -67,14 +67,9 @@ class InMemoryStore(PromptStore):
         self.prompts: dict[PromptId, Prompt] = {}
         self.active_prompts: dict[tuple[UserId, Purpose], PromptId] = {}
 
-    def create(
-            self,
-            purpose: Purpose,
-            name: str,
-            template: str,
-            user_id: str
-        ) -> Prompt:
+    def create(self, purpose: Purpose, name: str, template: str, user_id: str) -> Prompt:
         prompt_id = str(uuid4())
+        print(prompt_id)
         prompt = Prompt(
             id=prompt_id,
             purpose=purpose,
@@ -121,7 +116,7 @@ class InMemoryStore(PromptStore):
             purpose: Purpose,
             prompt_id: PromptId,
         ) -> Prompt | None:
-        prompt = self.prompts.get(prompt_id)
+        prompt = self.get(prompt_id)
         if prompt is None:
             return None
         self.active_prompts[(user_id, purpose)] = prompt_id
@@ -151,16 +146,17 @@ class FileSnapshotStore(InMemoryStore):
         with open(self.filepath, "r") as f:
             data = json.load(f)
         for p_data in data.get("prompts", []):
-            prompt = Prompt(**p_data)
+            prompt = Prompt.model_validate(p_data)
             self.prompts[prompt.id] = prompt
-        self.active_prompts = {
-            (user_id, purpose): prompt_id
-            for (user_id, purpose), prompt_id in data.get("active_prompts", {}).items()
-        }
+        for key, prompt_id in data.get("active_prompts", {}).items():
+            user_id, purpose = key.split("|", 1)
+            self.active_prompts[(user_id, purpose)] = prompt_id
+
+
 
     def _snapshot(self) -> None:
         data = {
-            "prompts": [p.dict() for p in self.prompts.values()],#type: ignore
+            "prompts": [p.model_dump() for p in self.prompts.values()],
             "active_prompts": {
                 f"{user_id}|{purpose}": prompt_id
                 for (user_id, purpose), prompt_id in self.active_prompts.items()

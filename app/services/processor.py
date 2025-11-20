@@ -15,9 +15,9 @@ def process_document(
     prompt = store.get_active(user_id=user_id, purpose=purpose)
     if not prompt:
         raise ValueError(f"No active prompt for purpose '{purpose}'")
-    filled_prompt = prompt.template.replace("{document}", document_text)#type: ignore
-    output_text, model_info, latency = llm_client.generate(
+    filled_prompt = prompt.template.replace("{document}", document_text)
+    output_text = llm_client.generate(
         prompt=filled_prompt,
         **params,
     )
-    return output_text["text"], model_info, latency
+    return output_text["text"], output_text["model_info"], output_text["latency"]

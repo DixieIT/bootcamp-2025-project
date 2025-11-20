@@ -25,7 +25,6 @@ def predict(
         store=store,
         user_id=x_user_id,
         purpose=req.purpose,
-        prompt=active_prompt,
         document_text=req.document_text,
         provider=req.provider,
         params=req.params,

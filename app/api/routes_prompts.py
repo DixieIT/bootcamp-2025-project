@@ -13,6 +13,7 @@ def create_prompt(
         x_user_id: str = Header(default="user_anon")
     ):
     prompt = store.create(
+        
         purpose=data.purpose,
         name=data.name,
         template=data.template,
@@ -36,7 +37,20 @@ def list_prompts(
         purpose: str | None = None,
         x_user_id: str = Header(default="user_anon")
     ):
-    return store.list(purpose=purpose)
+    prompts = store.list(purpose=purpose)
+    response_model: list[PromptRead] = []
+    for prompt in prompts:
+        response_model.append(
+            PromptRead(
+                id=prompt.id,
+                purpose=prompt.purpose,
+                name=prompt.name,
+                template=prompt.template,
+                version=prompt.version,
+                active=(store.get_active(user_id=x_user_id, purpose=prompt.purpose) == prompt)
+            )
+        )
+    return response_model
 
 
 @prompt.patch("/{prompt_id}", response_model=PromptRead)
@@ -48,7 +62,15 @@ def patch_prompt(
     prompt = store.patch(prompt_id=prompt_id, template=data.template, user_id=x_user_id)
     if not prompt:
         raise HTTPException(status_code=404, detail="Prompt not found")
-    return PromptRead.model_validate(prompt)
+    response_model: PromptRead = PromptRead(
+        id=prompt.id,
+        purpose=prompt.purpose,
+        name=prompt.name,
+        template=prompt.template,
+        version=prompt.version,
+        active=(store.get_active(user_id=x_user_id, purpose=prompt.purpose) == prompt)
+    )
+    return response_model
 
 
 @prompt.post("/{prompt_id}/activate")

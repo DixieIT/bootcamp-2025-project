@@ -11,6 +11,6 @@ class MockLLM(LLMClient):
         self.latency: int = 0
     def generate(self, prompt: str, **params):
         self.latency = 100
-        return {"text": f"[MOCK OUTPUT]\n{prompt[:200]} ...", "provider": "mock", "model_version": self.version}, self.model_info, self.latency
+        return {"text": f"[MOCK OUTPUT]\n{prompt[:200]} ...", "provider": "mock", "model_version": self.version, "model_info": self.model_info, "latency" : self.latency}
 
 PROVIDERS = {"mock": MockLLM}
