@@ -1,9 +1,11 @@
 from fastapi import APIRouter, Header, HTTPException
+import logging
 from app.models.schemas import PredictRequest, PredictResponse
 from app.services.processor import process_document
 from app.services.prompt_store import FileSnapshotStore, InMemoryStore
 from app.core.config import settings
 
+logger = logging.getLogger(__name__)
 predictrouter = APIRouter()
 
 store = FileSnapshotStore("var/data.json") if settings.FILE_SNAPSHOT else InMemoryStore()
@@ -13,8 +15,10 @@ def predict(
         req: PredictRequest,
         x_user_id: str = Header(default="user_anon"),
     ):
+    logger.info(f"Predict request for user={x_user_id}, purpose={req.purpose}, provider={req.provider}")
     active_prompt = store.get_active(user_id=x_user_id, purpose=req.purpose)
     if not active_prompt:
+        logger.warning(f"No active prompt for user={x_user_id}, purpose={req.purpose}")
         raise HTTPException(status_code=400, detail=f"No active prompt for purpose '{req.purpose}'")
 
     stored_prompt = store.get(active_prompt.id)
@@ -30,6 +34,7 @@ def predict(
         params=req.params,
     )
 
+    logger.info(f"Prediction completed: prompt_id={active_prompt.id}, latency={latency}ms")
     return PredictResponse(
         output_text=output_text,
         model_info=model_info,

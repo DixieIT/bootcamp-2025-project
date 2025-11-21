@@ -1,0 +1,19 @@
+2025-11-21 15:13:25,794 INFO app.api.routes_prompts Creating prompt for user=demo_user, purpose=summarize, name=Basic Summarizer
+2025-11-21 15:13:25,795 INFO app.api.routes_prompts Created prompt id=896ef7d6-48cc-45e1-aacb-a03b9b28a761
+2025-11-21 15:13:38,222 INFO app.api.routes_prompts Activating prompt id=896ef7d6-48cc-45e1-aacb-a03b9b28a761 for user=demo_user, purpose=summarize
+2025-11-21 15:13:38,223 INFO app.api.routes_prompts Successfully activated prompt id=896ef7d6-48cc-45e1-aacb-a03b9b28a761
+2025-11-21 15:14:12,008 INFO app.api.routes_predict Predict request for user=demo_user, purpose=summarize, provider=mock
+2025-11-21 15:14:12,008 WARNING app.api.routes_predict No active prompt for user=demo_user, purpose=summarize
+2025-11-21 15:14:32,242 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-21 15:14:45,001 INFO app.api.routes_predict Predict request for user=demo_user, purpose=summarize, provider=mock
+2025-11-21 15:14:45,001 WARNING app.api.routes_predict No active prompt for user=demo_user, purpose=summarize
+2025-11-21 15:16:42,198 INFO app.api.routes_prompts Creating prompt for user=alice, purpose=extract_entities, name=Entity Extractor
+2025-11-21 15:16:42,199 INFO app.api.routes_prompts Created prompt id=93ecbb09-2e9e-4995-85bd-a52e5e5bb5fa
+2025-11-21 15:17:01,358 INFO app.api.routes_prompts Patching prompt id=896ef7d6-48cc-45e1-aacb-a03b9b28a761 for user=demo_user
+2025-11-21 15:17:01,680 INFO app.api.routes_prompts Listing prompts for user=alice, purpose=extract_entities
+2025-11-21 15:17:06,966 INFO app.api.routes_prompts Patching prompt id=896ef7d6-48cc-45e1-aacb-a03b9b28a761 for user=alice
+2025-11-21 15:17:06,966 WARNING app.api.routes_prompts Prompt not found or unauthorized: id=896ef7d6-48cc-45e1-aacb-a03b9b28a761, user=alice
+2025-11-21 15:20:14,638 INFO app.api.routes_predict Predict request for user=demo_user, purpose=summarize, provider=openai_gpt4_that_doesnt_exist
+2025-11-21 15:20:14,638 ERROR app.services.processor Unsupported provider: openai_gpt4_that_doesnt_exist
+2025-11-21 16:49:55,086 INFO app.api.routes_prompts Listing prompts for user=test_user, purpose=test
+2025-11-21 17:45:42,207 INFO app.api.routes_prompts Listing prompts for user=testuser, purpose=nonexistent
