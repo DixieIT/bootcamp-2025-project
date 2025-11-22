@@ -150,35 +150,3 @@ def get_logs(limit: int = 100, level: str = ""):
 
         return cursor.fetchall()
 
-# ============= PROMPTS MANAGEMENT (Optional - for future use) =============
-
-def add_prompt(id: str, purpose: str, name: str, template: str, user_id: str):
-    """Add a prompt to the database"""
-    with get_db_connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute('''
-            INSERT INTO prompts (id, purpose, name, template, user_id)
-            VALUES (?, ?, ?, ?, ?)
-        ''', (id, purpose, name, template, user_id))
-        conn.commit()
-
-def set_active_prompt(user_id: str, purpose: str, prompt_id: str):
-    """Set a prompt as active for a user/purpose"""
-    with get_db_connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute('''
-            INSERT OR REPLACE INTO active_prompts (user_id, purpose, prompt_id)
-            VALUES (?, ?, ?)
-        ''', (user_id, purpose, prompt_id))
-        conn.commit()
-
-def get_active_prompt(user_id: str, purpose: str):
-    """Get the active prompt for a user/purpose"""
-    with get_db_connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute('''
-            SELECT p.* FROM prompts p
-            JOIN active_prompts ap ON p.id = ap.prompt_id
-            WHERE ap.user_id = ? AND ap.purpose = ?
-        ''', (user_id, purpose))
-        return cursor.fetchone()

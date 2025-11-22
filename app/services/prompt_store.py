@@ -233,3 +233,140 @@ class FileSnapshotStore(InMemoryStore):
         if result:
             self._snapshot()
         return result
+
+
+class DatabaseStore(PromptStore):
+    """SQLite-backed implementation of PromptStore."""
+
+    def __init__(self, db_path: str = "var/database.db") -> None:
+        import sqlite3
+        self.db_path = db_path
+        os.makedirs(os.path.dirname(db_path), exist_ok=True)
+        self._init_tables()
+
+    def _get_conn(self):
+        import sqlite3
+        conn = sqlite3.connect(self.db_path)
+        conn.row_factory = sqlite3.Row
+        return conn
+
+    def _init_tables(self) -> None:
+        with self._get_conn() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS prompts (
+                    id TEXT PRIMARY KEY,
+                    purpose TEXT NOT NULL,
+                    name TEXT NOT NULL,
+                    template TEXT NOT NULL,
+                    version INTEGER DEFAULT 1,
+                    user_id TEXT NOT NULL,
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                )
+            ''')
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS active_prompts (
+                    user_id TEXT NOT NULL,
+                    purpose TEXT NOT NULL,
+                    prompt_id TEXT NOT NULL,
+                    activated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    PRIMARY KEY (user_id, purpose),
+                    FOREIGN KEY (prompt_id) REFERENCES prompts(id)
+                )
+            ''')
+            conn.commit()
+
+    def _row_to_prompt(self, row) -> Prompt:
+        return Prompt(
+            id=row["id"],
+            purpose=row["purpose"],
+            name=row["name"],
+            template=row["template"],
+            version=row["version"],
+            user_id=row["user_id"],
+        )
+
+    def create(self, purpose: Purpose, name: str, template: str, user_id: str) -> Prompt:
+        prompt_id = str(uuid4())
+        with self._get_conn() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT INTO prompts (id, purpose, name, template, version, user_id)
+                VALUES (?, ?, ?, ?, 1, ?)
+            ''', (prompt_id, purpose, name, template, user_id))
+            conn.commit()
+        return Prompt(
+            id=prompt_id,
+            purpose=purpose,
+            name=name,
+            template=template,
+            version=1,
+            user_id=user_id,
+        )
+
+    def list(self, purpose: Purpose | None = None) -> list[Prompt]:
+        with self._get_conn() as conn:
+            cursor = conn.cursor()
+            if purpose is None:
+                cursor.execute("SELECT * FROM prompts")
+            else:
+                cursor.execute("SELECT * FROM prompts WHERE purpose = ?", (purpose,))
+            return [self._row_to_prompt(row) for row in cursor.fetchall()]
+
+    def get(self, prompt_id: PromptId) -> Prompt | None:
+        with self._get_conn() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM prompts WHERE id = ?", (prompt_id,))
+            row = cursor.fetchone()
+            return self._row_to_prompt(row) if row else None
+
+    def patch(self, prompt_id: PromptId, template: str, user_id: UserId) -> Prompt | None:
+        with self._get_conn() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM prompts WHERE id = ?", (prompt_id,))
+            row = cursor.fetchone()
+            if row is None or row["user_id"] != user_id:
+                return None
+            new_version = row["version"] + 1
+            cursor.execute('''
+                UPDATE prompts SET template = ?, version = ? WHERE id = ?
+            ''', (template, new_version, prompt_id))
+            conn.commit()
+            cursor.execute("SELECT * FROM prompts WHERE id = ?", (prompt_id,))
+            return self._row_to_prompt(cursor.fetchone())
+
+    def set_active(self, user_id: UserId, purpose: Purpose, prompt_id: PromptId) -> Prompt | None:
+        prompt = self.get(prompt_id)
+        if prompt is None:
+            return None
+        with self._get_conn() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT OR REPLACE INTO active_prompts (user_id, purpose, prompt_id)
+                VALUES (?, ?, ?)
+            ''', (user_id, purpose, prompt_id))
+            conn.commit()
+        return prompt
+
+    def get_active(self, user_id: UserId, purpose: Purpose) -> Prompt | None:
+        with self._get_conn() as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                SELECT p.* FROM prompts p
+                JOIN active_prompts ap ON p.id = ap.prompt_id
+                WHERE ap.user_id = ? AND ap.purpose = ?
+            ''', (user_id, purpose))
+            row = cursor.fetchone()
+            return self._row_to_prompt(row) if row else None
+
+    def delete(self, prompt_id: PromptId, user_id: UserId) -> bool:
+        with self._get_conn() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM prompts WHERE id = ?", (prompt_id,))
+            row = cursor.fetchone()
+            if row is None or row["user_id"] != user_id:
+                return False
+            cursor.execute("DELETE FROM active_prompts WHERE prompt_id = ?", (prompt_id,))
+            cursor.execute("DELETE FROM prompts WHERE id = ?", (prompt_id,))
+            conn.commit()
+            return True

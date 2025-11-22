@@ -2,13 +2,10 @@ from fastapi import APIRouter, Header, HTTPException
 import logging
 from app.models.schemas import PredictRequest, PredictResponse
 from app.services.processor import process_document
-from app.services.prompt_store import FileSnapshotStore, InMemoryStore
-from app.core.config import settings
+from app.core.dependencies import store
 
 logger = logging.getLogger(__name__)
 predictrouter = APIRouter()
-
-store = FileSnapshotStore("var/data.json") if settings.FILE_SNAPSHOT else InMemoryStore()
 
 @predictrouter.post("/", response_model=PredictResponse)
 def predict(

@@ -1,13 +1,10 @@
 from fastapi import APIRouter, Header, HTTPException
 import logging
 from app.models.schemas import PromptCreate, PromptRead, PromptPatch
-from app.services.prompt_store import FileSnapshotStore, InMemoryStore
-from app.core.config import settings
+from app.core.dependencies import store
 
 logger = logging.getLogger(__name__)
 prompt = APIRouter()
-
-store = FileSnapshotStore("var/data.json") if settings.FILE_SNAPSHOT else InMemoryStore()
 
 @prompt.post("/", response_model=PromptRead)
 def create_prompt(
