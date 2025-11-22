@@ -176,3 +176,8 @@ kill -9 <PID>
 rm var/data.json
 rm var/predictions.db
 ```
+
+
+#TO DO
+CONNECT DELETE FUCTION IN PROMPT_STORE TO DATABASE.
+
