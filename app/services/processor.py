@@ -19,7 +19,10 @@ def process_document(
         logger.error(f"Unsupported provider: {provider}")
         raise ValueError(f"Unsupported provider: {provider}")
     logger.info(f"Processing document with provider={provider}, user_id={user_id}, purpose={purpose}")
-    llm_client = PROVIDERS[provider]({})
+    if provider == "mock":
+        llm_client = PROVIDERS[provider]({})
+    else:
+        llm_client = PROVIDERS[provider]()
     prompt = store.get_active(user_id=user_id, purpose=purpose)
     if not prompt:
         logger.error(f"No active prompt for user_id={user_id}, purpose={purpose}")
@@ -33,10 +36,10 @@ def process_document(
         **params,
     )
 
-    # All providers now use @timed, so result is always (dict, duration)
     output_dict, duration = result
     logger.info(f"LLM generation completed in {duration}s")
 
+    output_dict["latency"] = int(duration * 1000)
     # Log prediction to database
     log_prediction(
         prompt=filled_prompt,

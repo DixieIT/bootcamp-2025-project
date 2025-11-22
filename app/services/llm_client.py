@@ -11,7 +11,7 @@ import app
 
 from ..models.provider import Provider
 from ..instrumentation import timed, timed_sync
-import os
+from ..core.config import settings
 
 
 class LLMClient(ABC):
@@ -49,7 +49,7 @@ class GoogleAIClient(LLMClient):
 
     def _ensure_client(self):
         if self.client is None:
-            api_key = os.getenv("GOOGLE_API_KEY", "")
+            api_key = settings.GOOGLE_API_KEY
             if not api_key:
                 raise ValueError("GOOGLE_API_KEY environment variable is not set")
             self.client = genai.Client(api_key=api_key)
@@ -122,14 +122,14 @@ class OpenAIClient(LLMClient):
 
     def _ensure_client(self):
         if self.client is None:
-            api_key = os.getenv("OPENAI_API_KEY", "")
+            api_key = settings.OPENAI_API_KEY
             if not api_key:
                 raise ValueError("OPENAI_API_KEY environment variable is not set")
             self.client = OpenAI(api_key=api_key)
 
     def _ensure_async_client(self):
         if self.async_client is None:
-            api_key = os.getenv("OPENAI_API_KEY", "")
+            api_key = settings.OPENAI_API_KEY
             if not api_key:
                 raise ValueError("OPENAI_API_KEY environment variable is not set")
             self.async_client = AsyncOpenAI(api_key=api_key)

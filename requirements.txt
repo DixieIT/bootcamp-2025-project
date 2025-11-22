@@ -13,3 +13,4 @@ ruff
 mypy
 black
 aiohttp
+streamlit

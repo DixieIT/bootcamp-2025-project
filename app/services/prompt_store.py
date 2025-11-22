@@ -60,6 +60,14 @@ class PromptStore(ABC):
         ) -> Prompt | None:
         ...
 
+    @abstractmethod
+    def delete(
+            self,
+            prompt_id: PromptId,
+            user_id: UserId,
+        ) -> bool:
+        ...
+
 
 class InMemoryStore(PromptStore):
     """In-memory implementation of PromptStore."""
@@ -132,6 +140,23 @@ class InMemoryStore(PromptStore):
             return None
         return self.prompts.get(prompt_id)
 
+    def delete(
+            self,
+            prompt_id: PromptId,
+            user_id: UserId,
+        ) -> bool:
+        prompt = self.prompts.get(prompt_id)
+        if prompt is None:
+            return False
+        if prompt.user_id != user_id:
+            return False
+        # Remove from active_prompts if it was active
+        keys_to_remove = [k for k, v in self.active_prompts.items() if v == prompt_id]
+        for key in keys_to_remove:
+            del self.active_prompts[key]
+        del self.prompts[prompt_id]
+        return True
+
 
 class FileSnapshotStore(InMemoryStore):
     """Wraps InMemoryStore and snapshots to var/data.json on writes."""
@@ -198,3 +223,13 @@ class FileSnapshotStore(InMemoryStore):
         if prompt is not None:
             self._snapshot()
         return prompt
+
+    def delete(
+            self,
+            prompt_id: PromptId,
+            user_id: UserId,
+        ) -> bool:
+        result = super().delete(prompt_id, user_id)
+        if result:
+            self._snapshot()
+        return result

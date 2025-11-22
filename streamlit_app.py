@@ -8,18 +8,18 @@ import requests
 from typing import Optional
 
 # Configuration
-API_BASE_URL = "http://localhost:8080"
+API_BASE_URL = "http://localhost:8081"
 
 # Page config
 st.set_page_config(
-    page_title="Prompted Doc Processor",
-    page_icon="🤖",
+    page_title="bootcamp-2025",
+    page_icon="⚙️",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
 # Sidebar navigation
-st.sidebar.title("🤖 Doc Processor Admin")
+st.sidebar.title("bootcamp-2025 Dashboard")
 st.sidebar.markdown("---")
 
 page = st.sidebar.radio(
@@ -36,30 +36,40 @@ st.sidebar.markdown("---")
 st.sidebar.caption("FastAPI Backend: " + API_BASE_URL)
 
 # Helper functions
-def api_get(endpoint: str, params: dict = None) -> Optional[dict]:
+def api_get(endpoint: str, params: Optional[dict] = None, headers: Optional[dict] = None) -> Optional[dict]:
     """Make GET request to API"""
     try:
-        response = requests.get(f"{API_BASE_URL}{endpoint}", params=params)
+        response = requests.get(f"{API_BASE_URL}{endpoint}", params=params, headers=headers)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
         st.error(f"API Error: {e}")
         return None
 
-def api_post(endpoint: str, json_data: dict, headers: dict = None) -> Optional[dict]:
+def api_post(endpoint: str, json_data: dict, headers: Optional[dict] = None, params: Optional[dict] = None) -> Optional[dict]:
     """Make POST request to API"""
     try:
-        response = requests.post(f"{API_BASE_URL}{endpoint}", json=json_data, headers=headers)
+        response = requests.post(f"{API_BASE_URL}{endpoint}", json=json_data, headers=headers, params=params)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
         st.error(f"API Error: {e}")
         return None
 
-def api_patch(endpoint: str, json_data: dict, headers: dict = None) -> Optional[dict]:
+def api_patch(endpoint: str, json_data: dict, headers: Optional[dict] = None) -> Optional[dict]:
     """Make PATCH request to API"""
     try:
         response = requests.patch(f"{API_BASE_URL}{endpoint}", json=json_data, headers=headers)
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        st.error(f"API Error: {e}")
+        return None
+
+def api_delete(endpoint: str, headers: Optional[dict] = None) -> Optional[dict]:
+    """Make DELETE request to API"""
+    try:
+        response = requests.delete(f"{API_BASE_URL}{endpoint}", headers=headers)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
@@ -123,7 +133,7 @@ Long doc: {{ document[:500] }}...
     st.markdown("---")
     st.subheader("Existing Prompts")
 
-    prompts_data = api_get("/v1/prompts/", params={})
+    prompts_data = api_get("/v1/prompts/", params={}, headers={"X-User-Id": user_id})
     if prompts_data and isinstance(prompts_data, list):
         if prompts_data:
             for prompt in prompts_data:
@@ -132,6 +142,11 @@ Long doc: {{ document[:500] }}...
                     st.write(f"**Active:** {'✅ Yes' if prompt.get('active') else '❌ No'}")
                     st.write(f"**Version:** {prompt.get('version')}")
                     st.code(prompt.get('template'), language="text")
+                    if st.button("🗑️ Delete", key=f"delete_{prompt.get('id')}"):
+                        result = api_delete(f"/v1/prompts/{prompt.get('id')}", headers={"X-User-Id": user_id})
+                        if result:
+                            st.success("Deleted!")
+                            st.rerun()
         else:
             st.info("No prompts created yet.")
 
@@ -140,7 +155,7 @@ elif page == "🔄 Manage Active":
     st.markdown("Activate prompts for different purposes.")
 
     # Get all prompts
-    prompts_data = api_get("/v1/prompts/")
+    prompts_data = api_get("/v1/prompts/", headers={"X-User-Id": user_id})
 
     if prompts_data and isinstance(prompts_data, list):
         if not prompts_data:
@@ -198,7 +213,17 @@ elif page == "🤖 Run Predictions":
     col1, col2 = st.columns([2, 1])
 
     with col1:
-        purpose = st.text_input("Purpose", placeholder="e.g., summarize", help="Which prompt purpose to use")
+        # Get available prompts for user
+        prompts_data = api_get("/v1/prompts/", headers={"X-User-Id": user_id})
+        prompt_options = {}  # display_name -> purpose
+        if prompts_data and isinstance(prompts_data, list):
+            for prompt in prompts_data:
+                if prompt.get('active'):
+                    display = f"@{prompt.get('name')} ({prompt.get('purpose')})"
+                    prompt_options[display] = prompt.get('purpose')
+
+        selected_display = st.selectbox("Template", list(prompt_options.keys()), help="Which prompt to use")
+        purpose = prompt_options.get(selected_display) if selected_display else None
         provider = st.selectbox("Provider", ["mock", "google", "openai"], help="LLM provider")
 
         document_text = st.text_area(

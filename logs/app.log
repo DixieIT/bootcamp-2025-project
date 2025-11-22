@@ -17,3 +17,191 @@
 2025-11-21 15:20:14,638 ERROR app.services.processor Unsupported provider: openai_gpt4_that_doesnt_exist
 2025-11-21 16:49:55,086 INFO app.api.routes_prompts Listing prompts for user=test_user, purpose=test
 2025-11-21 17:45:42,207 INFO app.api.routes_prompts Listing prompts for user=testuser, purpose=nonexistent
+2025-11-22 14:20:54,521 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:21:12,126 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:21:36,207 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:22:34,251 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:22:34,420 INFO app.api.routes_prompts Creating prompt for user=demo_user, purpose=sumarize, name=Instruct Summary
+2025-11-22 14:22:34,442 INFO app.api.routes_prompts Created prompt id=1f9839e6-f7b2-41ba-aea3-377510f1a72c
+2025-11-22 14:22:34,467 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:25:04,821 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:25:18,449 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:37:22,979 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:37:39,470 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:37:43,223 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:37:49,318 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:37:52,626 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:37:52,701 INFO app.api.routes_prompts Activating prompt id=1f9839e6-f7b2-41ba-aea3-377510f1a72c for user=demo_user, purpose=sumarize
+2025-11-22 14:37:52,726 INFO app.api.routes_prompts Successfully activated prompt id=1f9839e6-f7b2-41ba-aea3-377510f1a72c
+2025-11-22 14:37:52,841 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:37:59,925 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:37:59,978 INFO app.api.routes_prompts Activating prompt id=1f9839e6-f7b2-41ba-aea3-377510f1a72c for user=demo_user, purpose=sumarize
+2025-11-22 14:37:59,995 INFO app.api.routes_prompts Successfully activated prompt id=1f9839e6-f7b2-41ba-aea3-377510f1a72c
+2025-11-22 14:38:00,133 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:38:04,021 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:38:04,091 INFO app.api.routes_prompts Activating prompt id=1f9839e6-f7b2-41ba-aea3-377510f1a72c for user=demo_user, purpose=sumarize
+2025-11-22 14:38:04,113 INFO app.api.routes_prompts Successfully activated prompt id=1f9839e6-f7b2-41ba-aea3-377510f1a72c
+2025-11-22 14:38:04,201 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:38:07,320 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:38:07,362 INFO app.api.routes_prompts Activating prompt id=1f9839e6-f7b2-41ba-aea3-377510f1a72c for user=demo_user, purpose=sumarize
+2025-11-22 14:38:07,390 INFO app.api.routes_prompts Successfully activated prompt id=1f9839e6-f7b2-41ba-aea3-377510f1a72c
+2025-11-22 14:38:07,449 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:38:08,327 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:38:08,367 INFO app.api.routes_prompts Activating prompt id=1f9839e6-f7b2-41ba-aea3-377510f1a72c for user=demo_user, purpose=sumarize
+2025-11-22 14:38:08,384 INFO app.api.routes_prompts Successfully activated prompt id=1f9839e6-f7b2-41ba-aea3-377510f1a72c
+2025-11-22 14:38:08,444 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:38:09,699 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:38:09,766 INFO app.api.routes_prompts Activating prompt id=1f9839e6-f7b2-41ba-aea3-377510f1a72c for user=demo_user, purpose=sumarize
+2025-11-22 14:38:09,791 INFO app.api.routes_prompts Successfully activated prompt id=1f9839e6-f7b2-41ba-aea3-377510f1a72c
+2025-11-22 14:38:09,851 INFO app.api.routes_prompts Listing prompts for user=user_anon, purpose=None
+2025-11-22 14:41:16,095 INFO app.api.routes_predict Predict request for user=demo_user, purpose=summarize, provider=google
+2025-11-22 14:41:16,112 INFO app.services.processor Processing document with provider=google, user_id=demo_user, purpose=summarize
+2025-11-22 14:41:16,136 INFO app.instrumentation.observers 323.8928s - generate - START
+2025-11-22 14:49:29,945 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 14:49:46,585 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 14:49:46,637 INFO app.api.routes_prompts Activating prompt id=93ecbb09-2e9e-4995-85bd-a52e5e5bb5fa for user=demo_user, purpose=extract_entities
+2025-11-22 14:49:46,651 INFO app.api.routes_prompts Successfully activated prompt id=93ecbb09-2e9e-4995-85bd-a52e5e5bb5fa
+2025-11-22 14:49:46,720 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 14:51:42,984 INFO app.api.routes_predict Predict request for user=demo_user, purpose=summarize, provider=mock
+2025-11-22 14:51:43,003 INFO app.services.processor Processing document with provider=mock, user_id=demo_user, purpose=summarize
+2025-11-22 14:51:43,020 INFO app.instrumentation.observers 177.7596s - generate - START
+2025-11-22 14:51:43,036 INFO app.instrumentation.observers 177.7760s - generate - END
+2025-11-22 14:51:43,050 INFO app.instrumentation.observers Function generate took 0.00 seconds.
+2025-11-22 14:51:43,064 INFO app.services.processor LLM generation completed in 1.430511474609375e-05s
+2025-11-22 14:51:43,095 INFO app.api.routes_predict Prediction completed: prompt_id=896ef7d6-48cc-45e1-aacb-a03b9b28a761, latency=100ms
+2025-11-22 14:52:02,710 INFO app.api.routes_predict Predict request for user=demo_user, purpose=summarize, provider=google
+2025-11-22 14:52:02,730 INFO app.services.processor Processing document with provider=google, user_id=demo_user, purpose=summarize
+2025-11-22 14:52:02,753 INFO app.instrumentation.observers 197.4923s - generate - START
+2025-11-22 14:53:47,776 INFO app.api.routes_predict Predict request for user=demo_user, purpose=summarize, provider=openai
+2025-11-22 14:53:47,799 INFO app.services.processor Processing document with provider=openai, user_id=demo_user, purpose=summarize
+2025-11-22 14:53:47,814 INFO app.instrumentation.observers 302.5639s - generate - START
+2025-11-22 14:56:02,690 INFO app.api.routes_predict Predict request for user=demo_user, purpose=summarize, provider=openai
+2025-11-22 14:56:02,718 INFO app.services.processor Processing document with provider=openai, user_id=demo_user, purpose=summarize
+2025-11-22 14:56:02,735 INFO app.instrumentation.observers 47.1415s - generate - START
+2025-11-22 14:56:07,795 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 14:56:29,242 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 14:56:38,118 INFO app.api.routes_predict Predict request for user=demo_user, purpose=summarize, provider=mock
+2025-11-22 14:56:38,140 INFO app.services.processor Processing document with provider=mock, user_id=demo_user, purpose=summarize
+2025-11-22 14:56:38,155 INFO app.instrumentation.observers 82.5639s - generate - START
+2025-11-22 14:56:38,167 INFO app.instrumentation.observers 82.5762s - generate - END
+2025-11-22 14:56:38,189 INFO app.instrumentation.observers Function generate took 0.00 seconds.
+2025-11-22 14:56:38,205 INFO app.services.processor LLM generation completed in 1.1682510375976562e-05s
+2025-11-22 14:56:38,240 INFO app.api.routes_predict Prediction completed: prompt_id=896ef7d6-48cc-45e1-aacb-a03b9b28a761, latency=100ms
+2025-11-22 14:56:42,965 INFO app.api.routes_predict Predict request for user=demo_user, purpose=summarize, provider=google
+2025-11-22 14:56:42,983 INFO app.services.processor Processing document with provider=google, user_id=demo_user, purpose=summarize
+2025-11-22 14:56:43,009 INFO app.instrumentation.observers 87.4179s - generate - START
+2025-11-22 14:57:08,094 INFO app.api.routes_predict Predict request for user=demo_user, purpose=summarize, provider=google
+2025-11-22 14:57:08,111 INFO app.services.processor Processing document with provider=google, user_id=demo_user, purpose=summarize
+2025-11-22 14:57:08,131 INFO app.instrumentation.observers 2.1362s - generate - START
+2025-11-22 15:10:23,262 INFO app.api.routes_predict Predict request for user=demo_user, purpose=summarize, provider=google
+2025-11-22 15:10:23,294 INFO app.services.processor Processing document with provider=google, user_id=demo_user, purpose=summarize
+2025-11-22 15:10:23,323 INFO app.instrumentation.observers 107.1751s - generate - START
+2025-11-22 15:10:23,339 ERROR app.core.errors Unhandled exception: GOOGLE_API_KEY environment variable is not set
+2025-11-22 15:10:23,355 ERROR app.core.errors NoneType: None
+
+2025-11-22 15:12:22,076 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:12:42,819 INFO app.api.routes_predict Predict request for user=demo_user, purpose=summarize, provider=google
+2025-11-22 15:12:42,842 INFO app.services.processor Processing document with provider=google, user_id=demo_user, purpose=summarize
+2025-11-22 15:12:42,867 INFO app.instrumentation.observers 27.4867s - generate - START
+2025-11-22 15:12:43,054 INFO google_genai.models AFC is enabled with max remote calls: 10.
+2025-11-22 15:12:44,509 INFO httpx HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-11-22 15:12:44,529 INFO app.instrumentation.observers 29.1486s - generate - END
+2025-11-22 15:12:44,540 INFO app.instrumentation.observers Function generate took 1.65 seconds.
+2025-11-22 15:12:44,550 INFO app.services.processor LLM generation completed in 1.6461503505706787s
+2025-11-22 15:12:44,572 INFO app.api.routes_predict Prediction completed: prompt_id=896ef7d6-48cc-45e1-aacb-a03b9b28a761, latency=0ms
+2025-11-22 15:19:14,055 INFO app.api.routes_predict Predict request for user=demo_user, purpose=summarize, provider=google
+2025-11-22 15:19:14,073 INFO app.services.processor Processing document with provider=google, user_id=demo_user, purpose=summarize
+2025-11-22 15:19:14,096 INFO app.instrumentation.observers 4.7667s - generate - START
+2025-11-22 15:19:14,213 INFO google_genai.models AFC is enabled with max remote calls: 10.
+2025-11-22 15:19:16,415 INFO httpx HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-11-22 15:19:16,450 INFO app.instrumentation.observers 7.1203s - generate - END
+2025-11-22 15:19:16,468 INFO app.instrumentation.observers Function generate took 2.34 seconds.
+2025-11-22 15:19:16,483 INFO app.services.processor LLM generation completed in 2.3390543460845947s
+2025-11-22 15:19:16,512 INFO app.api.routes_predict Prediction completed: prompt_id=896ef7d6-48cc-45e1-aacb-a03b9b28a761, latency=2339ms
+2025-11-22 15:20:46,044 INFO app.api.routes_prompts Listing prompts for user=, purpose=None
+2025-11-22 15:21:03,077 INFO app.api.routes_prompts Listing prompts for user=, purpose=None
+2025-11-22 15:21:03,105 INFO app.api.routes_prompts Activating prompt id=4a3fe029-5131-48a5-ad77-c0f3f77029fe for user=, purpose=translate
+2025-11-22 15:21:03,122 INFO app.api.routes_prompts Successfully activated prompt id=4a3fe029-5131-48a5-ad77-c0f3f77029fe
+2025-11-22 15:21:03,198 INFO app.api.routes_prompts Listing prompts for user=, purpose=None
+2025-11-22 15:21:18,807 INFO app.api.routes_prompts Listing prompts for user=, purpose=None
+2025-11-22 15:21:21,079 INFO app.api.routes_prompts Listing prompts for user=, purpose=None
+2025-11-22 15:21:35,793 INFO app.api.routes_prompts Listing prompts for user=, purpose=None
+2025-11-22 15:24:59,062 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:26:33,203 INFO app.api.routes_predict Predict request for user=demo_user, purpose=summarize, provider=google
+2025-11-22 15:26:33,218 INFO app.services.processor Processing document with provider=google, user_id=demo_user, purpose=summarize
+2025-11-22 15:26:33,243 INFO app.instrumentation.observers 143.7960s - generate - START
+2025-11-22 15:26:33,332 INFO google_genai.models AFC is enabled with max remote calls: 10.
+2025-11-22 15:26:35,296 INFO httpx HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-11-22 15:26:35,314 INFO app.instrumentation.observers 145.8674s - generate - END
+2025-11-22 15:26:35,328 INFO app.instrumentation.observers Function generate took 2.06 seconds.
+2025-11-22 15:26:35,342 INFO app.services.processor LLM generation completed in 2.060067892074585s
+2025-11-22 15:26:35,369 INFO app.api.routes_predict Prediction completed: prompt_id=896ef7d6-48cc-45e1-aacb-a03b9b28a761, latency=2060ms
+2025-11-22 15:37:40,645 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:37:48,232 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:37:48,357 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:37:59,926 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:38:09,945 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:38:12,691 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:38:56,860 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:38:56,997 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:38:57,083 INFO app.api.routes_predict Predict request for user=demo_user, purpose=sumarize, provider=google
+2025-11-22 15:38:57,099 INFO app.services.processor Processing document with provider=google, user_id=demo_user, purpose=sumarize
+2025-11-22 15:38:57,124 INFO app.instrumentation.observers 91.9611s - generate - START
+2025-11-22 15:38:57,214 INFO google_genai.models AFC is enabled with max remote calls: 10.
+2025-11-22 15:39:00,870 INFO httpx HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-11-22 15:39:00,895 INFO app.instrumentation.observers 95.7317s - generate - END
+2025-11-22 15:39:00,908 INFO app.instrumentation.observers Function generate took 3.76 seconds.
+2025-11-22 15:39:00,920 INFO app.services.processor LLM generation completed in 3.7565274238586426s
+2025-11-22 15:39:00,951 INFO app.api.routes_predict Prediction completed: prompt_id=1f9839e6-f7b2-41ba-aea3-377510f1a72c, latency=3756ms
+2025-11-22 15:40:34,027 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:43:46,887 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:44:35,444 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:44:35,692 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:44:38,433 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:44:55,078 INFO app.api.routes_prompts Deleting prompt id=a3fe029-5131-48a5-ad77-c0f3f77029fe for user=demo_user
+2025-11-22 15:44:55,104 WARNING app.api.routes_prompts Failed to delete prompt: id=a3fe029-5131-48a5-ad77-c0f3f77029fe, user=demo_user
+2025-11-22 15:45:01,966 INFO app.api.routes_prompts Deleting prompt id=a3fe029-5131-48a5-ad77-c0f3f77029fe for user=demo_user
+2025-11-22 15:45:01,985 WARNING app.api.routes_prompts Failed to delete prompt: id=a3fe029-5131-48a5-ad77-c0f3f77029fe, user=demo_user
+2025-11-22 15:45:06,163 INFO app.api.routes_prompts Deleting prompt id=a3fe029-5131-48a5-ad77-c0f3f77029fe for user=dario
+2025-11-22 15:45:06,181 WARNING app.api.routes_prompts Failed to delete prompt: id=a3fe029-5131-48a5-ad77-c0f3f77029fe, user=dario
+2025-11-22 15:45:09,021 INFO app.api.routes_prompts Deleting prompt id=a3fe029-5131-48a5-ad77-c0f3f77029fe for user=dario
+2025-11-22 15:45:09,046 WARNING app.api.routes_prompts Failed to delete prompt: id=a3fe029-5131-48a5-ad77-c0f3f77029fe, user=dario
+2025-11-22 15:45:18,910 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:46:07,411 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:47:12,937 INFO app.api.routes_prompts Creating prompt for user=test_user, purpose=test_delete, name=Test Prompt
+2025-11-22 15:47:12,950 INFO app.api.routes_prompts Created prompt id=57bbb8a7-7d34-43d3-a731-584bc48ab628
+2025-11-22 15:47:16,999 INFO app.api.routes_prompts Deleting prompt id=57bbb8a7-7d34-43d3-a731-584bc48ab628 for user=test_user
+2025-11-22 15:47:17,017 INFO app.api.routes_prompts Successfully deleted prompt id=57bbb8a7-7d34-43d3-a731-584bc48ab628
+2025-11-22 15:47:21,847 INFO app.api.routes_prompts Deleting prompt id=57bbb8a7-7d34-43d3-a731-584bc48ab628 for user=test_user
+2025-11-22 15:47:21,863 WARNING app.api.routes_prompts Failed to delete prompt: id=57bbb8a7-7d34-43d3-a731-584bc48ab628, user=test_user
+2025-11-22 15:48:07,006 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:48:26,370 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:48:26,397 INFO app.api.routes_prompts Deleting prompt id=4a3fe029-5131-48a5-ad77-c0f3f77029fe for user=demo_user
+2025-11-22 15:48:26,419 WARNING app.api.routes_prompts Failed to delete prompt: id=4a3fe029-5131-48a5-ad77-c0f3f77029fe, user=demo_user
+2025-11-22 15:48:33,726 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:48:37,047 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:48:37,072 INFO app.api.routes_prompts Deleting prompt id=4a3fe029-5131-48a5-ad77-c0f3f77029fe for user=demo_user
+2025-11-22 15:48:37,084 WARNING app.api.routes_prompts Failed to delete prompt: id=4a3fe029-5131-48a5-ad77-c0f3f77029fe, user=demo_user
+2025-11-22 15:50:02,057 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:50:09,149 INFO app.api.routes_prompts Listing prompts for user=dario, purpose=None
+2025-11-22 15:50:10,840 INFO app.api.routes_prompts Listing prompts for user=dario, purpose=None
+2025-11-22 15:50:10,866 INFO app.api.routes_prompts Deleting prompt id=4a3fe029-5131-48a5-ad77-c0f3f77029fe for user=dario
+2025-11-22 15:50:10,881 INFO app.api.routes_prompts Successfully deleted prompt id=4a3fe029-5131-48a5-ad77-c0f3f77029fe
+2025-11-22 15:50:10,947 INFO app.api.routes_prompts Listing prompts for user=dario, purpose=None
+2025-11-22 15:50:18,431 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:50:18,560 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:50:18,589 INFO app.api.routes_prompts Deleting prompt id=17f78d79-e934-42f2-9308-56daefe8a04e for user=demo_user
+2025-11-22 15:50:18,603 WARNING app.api.routes_prompts Failed to delete prompt: id=17f78d79-e934-42f2-9308-56daefe8a04e, user=demo_user
+2025-11-22 15:50:24,655 INFO app.api.routes_prompts Listing prompts for user=dario, purpose=None
+2025-11-22 15:50:26,438 INFO app.api.routes_prompts Listing prompts for user=dario, purpose=None
+2025-11-22 15:50:26,465 INFO app.api.routes_prompts Deleting prompt id=17f78d79-e934-42f2-9308-56daefe8a04e for user=dario
+2025-11-22 15:50:26,478 INFO app.api.routes_prompts Successfully deleted prompt id=17f78d79-e934-42f2-9308-56daefe8a04e
+2025-11-22 15:50:26,549 INFO app.api.routes_prompts Listing prompts for user=dario, purpose=None
+2025-11-22 15:50:31,037 INFO app.api.routes_prompts Listing prompts for user=dario, purpose=None
+2025-11-22 15:50:31,066 INFO app.api.routes_prompts Deleting prompt id=ba85459c-2ede-4dd4-b35e-b7d93b88adf4 for user=dario
+2025-11-22 15:50:31,081 INFO app.api.routes_prompts Successfully deleted prompt id=ba85459c-2ede-4dd4-b35e-b7d93b88adf4
+2025-11-22 15:50:31,149 INFO app.api.routes_prompts Listing prompts for user=dario, purpose=None
+2025-11-22 15:50:38,686 INFO app.api.routes_prompts Listing prompts for user=, purpose=None
+2025-11-22 15:51:14,537 INFO app.api.routes_prompts Listing prompts for user=, purpose=None
+2025-11-22 15:51:23,711 INFO app.api.routes_prompts Listing prompts for user=demo_user, purpose=None
+2025-11-22 15:51:32,119 INFO app.api.routes_prompts Listing prompts for user=dixie, purpose=None

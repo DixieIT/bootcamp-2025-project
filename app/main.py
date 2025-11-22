@@ -19,14 +19,13 @@ app.include_router(routes_prompts.prompt, prefix="/v1/prompts")
 app.include_router(routes_predict.predictrouter, prefix="/v1/predict")
 app.include_router(routes_history.router, prefix="/v1")
 
-
 @app.get("/health")
 def health():
     return {"status": "ok"}
 
 @app.get("/history")
 def get_history(limit: int = 10, level: str = ""):
-    """s
+    """
     Get application logs from database
 
     Query params:

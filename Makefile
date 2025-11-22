@@ -1,7 +1,7 @@
 .PHONY: dev lint typecheck test run docker-build docker-run
 
 dev: ## run app locally
-	uvicorn app.main:app --reload --port 8080
+	uvicorn app.main:app --reload --port 8081
 
 lint:
 	ruff check .

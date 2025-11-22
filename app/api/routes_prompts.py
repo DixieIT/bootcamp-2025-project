@@ -96,3 +96,17 @@ def activate_prompt(
         raise HTTPException(status_code=404, detail="Prompt not found or purpose mismatch")
     logger.info(f"Successfully activated prompt id={prompt_id}")
     return {"status": "ok"}
+
+
+@prompt.delete("/{prompt_id}")
+def delete_prompt(
+        prompt_id: str,
+        x_user_id: str = Header(default="user_anon"),
+    ):
+    logger.info(f"Deleting prompt id={prompt_id} for user={x_user_id}")
+    result = store.delete(prompt_id=prompt_id, user_id=x_user_id)
+    if not result:
+        logger.warning(f"Failed to delete prompt: id={prompt_id}, user={x_user_id}")
+        raise HTTPException(status_code=404, detail="Prompt not found or unauthorized")
+    logger.info(f"Successfully deleted prompt id={prompt_id}")
+    return {"status": "ok"}
