@@ -1,7 +1,7 @@
-.PHONY: dev lint typecheck test run docker-build docker-run
+.PHONY: dev lint typecheck test run docker-build docker-run compose-up compose-down compose-logs
 
 dev: ## run app locally
-	uvicorn app.main:app --reload --port 8081
+	uvicorn app.main:app --reload --port 8080
 
 lint:
 	ruff check .
@@ -20,3 +20,12 @@ docker-build:
 
 docker-run:
 	docker run --rm -p 8080:8080 --env-file .env prompted-doc-processor:local
+
+compose-up:
+	docker compose up --build -d
+
+compose-down:
+	docker compose down
+
+compose-logs:
+	docker compose logs -f
